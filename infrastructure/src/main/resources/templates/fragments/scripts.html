@@ -1,0 +1,24 @@
+<th:block th:fragment="general">
+    <script th:src="@{/public/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/public/plugins/jquery-ui/jquery-ui.min.js}"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <script th:src="@{/public/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</th:block>
+
+<!--Docs: https://www.jqueryscript.net/time-clock/Date-Time-Picker-Bootstrap-4.html-->
+<th:block th:fragment="date-time-picker">
+    <script th:src="@{/public/plugins/moment/moment.min.js}"></script>
+    <script th:src="@{/public/plugins/daterangepicker/daterangepicker.js}"></script>
+    <script th:src="@{/public/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+</th:block>
+
+<th:block th:fragment="core">
+    <script th:src="@{/public/assets/js/adminlte.js}"></script>
+</th:block>
+
+<th:block th:fragment="form">
+    <script th:src="@{/public/plugins/jquery-validation/jquery.validate.js}"></script>
+    <script th:src="@{/public/plugins/inputmask/jquery.inputmask.min.js}"></script>
+</th:block>

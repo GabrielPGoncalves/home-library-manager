@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <th:block th:replace="~{fragments/head :: inside-head}"></th:block>
+    <link rel="stylesheet" th:href="@{/public/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}">
+    <link rel="stylesheet" th:href="@{/public/assets/css/custom/image-uploader.css}">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+
+    <th:block th:replace="~{fragments/navbar :: navbar}"></th:block>
+
+    <div class="content-wrapper py-3">
+        <div class="content-header">
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="@{/library}">Minha Biblioteca</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/library/books}">Livros</a></li>
+                            <li class="breadcrumb-item active">Cadastro</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Cadastrar novo Livro</h3>
+                    </div>
+
+                    <th:block th:with="actionUrl = '/library/books/' + ${editMode ? 'update' : 'create'}">
+                        <form id="book-form" th:action="@{${actionUrl}}" th:object="${book}" method="POST">
+                            <input type="text" th:if="${editMode}" th:field="*{id}" id="id" hidden readonly>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-xl-3 col-md-6 mb-md-0 mb-3">
+                                        <label for="fileInput">Imagem da Capa</label>
+
+                                        <div id="imageUpload" class="image-upload-container">
+                                            <button type="button" id="removeImage" class="remove-btn" title="Remover imagem">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <i id="uploadIcon" class="upload-icon fas fa-plus-circle"></i>
+                                        </div>
+
+                                        <input type="file" id="fileInput" accept="image/*">
+                                        <input type="text" id="fileInputContent" th:field="*{coverImage}" hidden>
+                                    </div>
+                                    <div class="col-xl-9 col-md-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="title">Título</label>
+                                                    <input type="text" class="form-control" id="title" th:field="*{title}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="author">Autor</label>
+                                                    <input type="text" class="form-control" id="author" th:field="*{author}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="acquisitionDate">Data de Aquisição</label>
+                                            <div class="input-group date hlm-date-container" id="acquisitionDateElement" data-target-input="#acquisitionDate">
+                                                <input type="text" class="form-control hlm-date-input" id="acquisitionDate" th:field="*{acquisitionDate}">
+                                                <div class="input-group-append" data-target="#acquisitionDateElement" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="readingStartDate">Data de Início da Leitura</label>
+                                            <div class="input-group date hlm-date-container" id="readingStartDateElement" data-target-input="#readingStartDate">
+                                                <input type="text" class="form-control hlm-date-input" id="readingStartDate" th:field="*{readingStartDate}">
+                                                <div class="input-group-append" data-target="#readingStartDateElement" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="icheck-secondary d-inline">
+                                                <input type="checkbox" id="read" th:field="*{read}">
+                                                <label for="read">Leitura Realizada</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="readingEndDate">Data de Término da Leitura</label>
+                                            <div class="input-group date hlm-date-container" id="readingEndDateElement" data-target-input="#readingEndDate">
+                                                <input type="text" class="form-control hlm-date-input" id="readingEndDate" th:field="*{readingEndDate}" th:disabled="${editMode ? (book.readingEndDate != null || book.read == true ? '' : 'disabled') : 'disabled'}">
+                                                <div class="input-group-append" data-target="#readingEndDateElement" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer d-flex justify-content-end">
+                                <a th:href="@{/library/books}" class="btn btn-outline-secondary mr-3">Voltar</a>
+                                <button type="submit" class="btn btn-secondary">Enviar</button>
+                            </div>
+                        </form>
+                    </th:block>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</div>
+
+<th:block th:replace="~{fragments/scripts :: general}"></th:block>
+<th:block th:replace="~{fragments/scripts :: core}"></th:block>
+<th:block th:replace="~{fragments/scripts :: form}"></th:block>
+<th:block th:replace="~{fragments/scripts :: date-time-picker}"></th:block>
+<script th:src="@{/public/assets/js/pages/library/books/registration.validation.js}"></script>
+<script th:src="@{/public/assets/js/pages/library/books/registration.datetimepicker.js}"></script>
+<script th:src="@{/public/assets/js/pages/library/books/registration.general.js}"></script>
+<script th:src="@{/public/assets/js/custom/image-uploader.js}"></script>
+</body>
+</html>
