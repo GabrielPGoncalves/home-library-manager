@@ -5,3 +5,9 @@ $('#read').change(event => {
     readingEndDateSelector.text('')
     readingEndDateSelector.datetimepicker('clear')
 })
+
+$('#isbn').inputmask({
+    mask: "9999999999[999]",
+    showMaskOnHover: false,
+    placeholder: ''
+})

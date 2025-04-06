@@ -37,7 +37,7 @@
                         <form id="book-form" th:action="@{${actionUrl}}" th:object="${book}" method="POST">
                             <input type="text" th:if="${editMode}" th:field="*{id}" id="id" hidden readonly>
                             <div class="card-body">
-                                <div class="row mb-3">
+                                <div class="row mb-4">
                                     <div class="col-xl-3 col-md-6 mb-md-0 mb-3">
                                         <label for="fileInput">Imagem da Capa</label>
 
@@ -68,21 +68,45 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="acquisitionDate">Data de Aquisição</label>
-                                            <div class="input-group date hlm-date-container" id="acquisitionDateElement" data-target-input="#acquisitionDate">
-                                                <input type="text" class="form-control hlm-date-input" id="acquisitionDate" th:field="*{acquisitionDate}">
-                                                <div class="input-group-append" data-target="#acquisitionDateElement" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="acquisitionDate">Data de Aquisição</label>
+                                                    <div class="input-group date hlm-date-container" id="acquisitionDateElement" data-target-input="#acquisitionDate">
+                                                        <input type="text" class="form-control hlm-date-input" id="acquisitionDate" th:field="*{acquisitionDate}">
+                                                        <div class="input-group-append" data-target="#acquisitionDateElement" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="d-block">Tipo de Livro</label>
+                                                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                        <label class="btn btn-outline-secondary btn-toggle active">
+                                                            <input type="radio" id="literary-type" value="LITERARY" name="type" autocomplete="off" th:checked="${book.type == 'LITERARY' || book.type == null}"> Literário
+                                                        </label>
+                                                        <label class="btn btn-outline-secondary btn-toggle">
+                                                            <input type="radio" id="exhibition-type" value="EXHIBITION" name="type" autocomplete="off" th:checked="${book.type == 'EXHIBITION'}"> Expositivo
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>ISBN</label>
+                                                    <input type="text" class="form-control" id="isbn" th:field="*{isbn}">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                </div>
+                                <hr>
+                                <div class="row mb-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <label for="readingStartDate">Data de Início da Leitura</label>
                                             <div class="input-group date hlm-date-container" id="readingStartDateElement" data-target-input="#readingStartDate">

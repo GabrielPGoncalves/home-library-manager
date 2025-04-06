@@ -1,4 +1,3 @@
-
 $(document).ready(() => {
     const imageUpload = $('#imageUpload')
     const fileInput = $('#fileInput')
@@ -6,8 +5,10 @@ $(document).ready(() => {
     const removeImage = $('#removeImage')
     const uploadIcon = $('#uploadIcon')
 
+    const imageUrlPrefix = 'data:image/jpeg;base64,'
+
     if (fileInputContent.val() !== '') {
-        imageUpload.css('backgroundImage', `url('data:image/jpeg;base64,${fileInputContent.val()}')`)
+        imageUpload.css('backgroundImage', `url('${imageUrlPrefix}${fileInputContent.val()}')`)
         uploadIcon.addClass('hidden')
         removeImage.css('display', 'flex')
     }

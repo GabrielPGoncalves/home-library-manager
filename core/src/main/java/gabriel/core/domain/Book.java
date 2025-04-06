@@ -8,32 +8,40 @@ import java.util.UUID;
 
 public class Book {
 
+    public enum Type {
+        LITERARY, EXHIBITION
+    }
+
     private UUID id;
     private String title;
     private String author;
     private Image coverImage;
+    private Type type;
+    private String isbn;
     private LocalDate acquisitionDate;
     private LocalDate readingStartDate;
     private boolean read;
     private LocalDate readingEndDate;
 
-    public Book(UUID id, String title, String author, Image coverImage, LocalDate acquisitionDate, LocalDate readingStartDate, boolean read, LocalDate readingEndDate) {
-        this(id, title, author, coverImage);
+    public Book(UUID id, String title, String author, Image coverImage, Type type, String isbn, LocalDate acquisitionDate, LocalDate readingStartDate, boolean read, LocalDate readingEndDate) {
+        this(id, title, author, coverImage, type, isbn);
         this.acquisitionDate = acquisitionDate;
         this.readingStartDate = readingStartDate;
         this.read = read;
         this.readingEndDate = readingEndDate;
     }
 
-    public Book(UUID id, String title, String author, Image coverImage) {
-        this(id, title, author);
+    public Book(UUID id, String title, String author, Image coverImage, Type type, String isbn) {
+        this(id, title, author, type);
         this.coverImage = coverImage;
+        this.isbn = isbn;
     }
 
-    public Book(UUID id, String title, String author) {
+    public Book(UUID id, String title, String author, Type type) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.type = type;
     }
 
     public Book(){
@@ -69,6 +77,22 @@ public class Book {
 
     public void setCoverImage(Image coverImage) {
         this.coverImage = coverImage;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public boolean isRead() {
@@ -111,7 +135,7 @@ public class Book {
     public final boolean equals(Object o) {
         if (!(o instanceof Book book)) return false;
 
-        return read == book.read && Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(coverImage, book.coverImage) && Objects.equals(acquisitionDate, book.acquisitionDate) && Objects.equals(readingStartDate, book.readingStartDate) && Objects.equals(readingEndDate, book.readingEndDate);
+        return read == book.read && Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(coverImage, book.coverImage) && type == book.type && Objects.equals(isbn, book.isbn) && Objects.equals(acquisitionDate, book.acquisitionDate) && Objects.equals(readingStartDate, book.readingStartDate) && Objects.equals(readingEndDate, book.readingEndDate);
     }
 
     @Override
@@ -120,6 +144,8 @@ public class Book {
         result = 31 * result + Objects.hashCode(title);
         result = 31 * result + Objects.hashCode(author);
         result = 31 * result + Objects.hashCode(coverImage);
+        result = 31 * result + Objects.hashCode(type);
+        result = 31 * result + Objects.hashCode(isbn);
         result = 31 * result + Objects.hashCode(acquisitionDate);
         result = 31 * result + Objects.hashCode(readingStartDate);
         result = 31 * result + Boolean.hashCode(read);

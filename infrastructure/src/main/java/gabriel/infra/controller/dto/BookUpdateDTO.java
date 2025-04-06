@@ -19,7 +19,15 @@ public class BookUpdateDTO {
     @Size(min = 2, max = 100)
     private String author;
 
+    private String coverImage;
+
     private LocalDate acquisitionDate;
+
+    @NotBlank
+    private String type;
+
+    @Size(min = 10, max = 13)
+    private String isbn;
 
     private LocalDate readingStartDate;
 
@@ -27,7 +35,6 @@ public class BookUpdateDTO {
 
     private LocalDate readingEndDate;
 
-    private String coverImage;
 
     public UUID getId() {
         return id;
@@ -59,6 +66,22 @@ public class BookUpdateDTO {
 
     public void setAcquisitionDate(LocalDate acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public LocalDate getReadingStartDate() {

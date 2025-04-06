@@ -10,6 +10,9 @@ $('#book-form').validate({
             minlength: 2,
             maxlength: 100
         },
+        type: {
+            required: true
+        }
 
     },
     messages: {
@@ -22,6 +25,9 @@ $('#book-form').validate({
             required: 'Insira o nome do autor',
             minlength: 'O nome do autor deve ter no mínimio 2 caracteres',
             maxlength: 'O nome do autor deve ter no máximo 100 caracteres'
+        },
+        type: {
+            required: 'Selecione um tipo para o livro'
         }
     },
     errorElement: 'span',

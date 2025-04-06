@@ -1,5 +1,6 @@
 package gabriel.infra.database.entity;
 
+import gabriel.core.domain.Book;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -23,6 +24,13 @@ public class BookEntity {
     @Lob
     @Column(columnDefinition = "BLOB")
     private byte[] coverImage;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Book.Type type;
+
+    @Column(length = 13)
+    private String isbn;
 
     private LocalDate acquisitionDate;
 
@@ -63,6 +71,22 @@ public class BookEntity {
 
     public void setCoverImage(byte[] coverImage) {
         this.coverImage = coverImage;
+    }
+
+    public Book.Type getType() {
+        return type;
+    }
+
+    public void setType(Book.Type type) {
+        this.type = type;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public LocalDate getAcquisitionDate() {
