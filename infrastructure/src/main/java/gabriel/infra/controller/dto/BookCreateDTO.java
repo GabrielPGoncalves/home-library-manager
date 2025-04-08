@@ -22,7 +22,7 @@ public class BookCreateDTO {
     @NotBlank
     private String type;
 
-    @Size(min = 10, max = 13)
+    @Size(max = 13)
     private String isbn;
 
     private LocalDate readingStartDate;

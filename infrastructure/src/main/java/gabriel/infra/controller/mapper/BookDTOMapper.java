@@ -19,6 +19,7 @@ public interface BookDTOMapper {
 
     Book toDomain(BookUpdateDTO bookUpdateDTO);
 
+    @Mapping(target = "coverImage", source = "coverImage.url")
     BookViewDTO toViewDTO(Book book);
 
     @Mappings({

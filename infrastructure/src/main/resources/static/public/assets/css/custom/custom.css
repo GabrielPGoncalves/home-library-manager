@@ -5,3 +5,11 @@
 .zoom-hover:hover {
     transform: scale(1.07);
 }
+
+.book-cover {
+    /*width: 3.5rem;*/
+    width: 4rem;
+    aspect-ratio: 5/7;
+    object-fit: cover;
+    border-radius: 4px;
+}

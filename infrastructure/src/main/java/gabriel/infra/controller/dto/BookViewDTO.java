@@ -5,6 +5,7 @@ import java.util.UUID;
 public record BookViewDTO(
         UUID id,
         String title,
-        String author
+        String author,
+        String coverImage
 ) {
 }
