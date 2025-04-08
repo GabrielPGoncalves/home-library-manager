@@ -38,7 +38,8 @@ public class BookService {
         Notification validationResult = bookValidator.validate(book);
 
         if(validationResult.hasErrors()) {
-            throw new BookValidationFailedException(validationResult.getErrorsAsString());
+            String errorMessage = "The book " + book.getId() + " has " + validationResult.getErrorsCount() + " errors: " + validationResult.getErrorsAsString();
+            throw new BookValidationFailedException(errorMessage);
         }
 
         bookRepository.save(book);
@@ -52,7 +53,8 @@ public class BookService {
         Notification validationResult = bookValidator.validate(book);
 
         if(validationResult.hasErrors()) {
-            throw new BookValidationFailedException(validationResult.getErrorsAsString());
+            String errorMessage = "The book " + book.getId() + " has " + validationResult.getErrorsCount() + " errors: " + validationResult.getErrorsAsString();
+            throw new BookValidationFailedException(errorMessage);
         }
 
         Book targetBook = findById(book.getId());
@@ -67,4 +69,5 @@ public class BookService {
     public void delete(UUID id) {
         bookRepository.deleteById(id);
     }
+
 }

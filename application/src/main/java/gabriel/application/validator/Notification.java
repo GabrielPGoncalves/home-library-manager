@@ -21,4 +21,8 @@ public class Notification {
     public String getErrorsAsString(){
         return String.join("; ", errors);
     }
+
+    public int getErrorsCount(){
+        return errors.size();
+    }
 }

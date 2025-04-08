@@ -2,6 +2,7 @@ package gabriel.infra.controller.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.ISBN;
 
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ public class BookCreateDTO {
     @NotBlank
     private String type;
 
-    @Size(max = 13)
+    @ISBN(type = ISBN.Type.ANY)
     private String isbn;
 
     private LocalDate readingStartDate;
@@ -68,7 +69,7 @@ public class BookCreateDTO {
     }
 
     public void setIsbn(String isbn) {
-        this.isbn = isbn;
+        this.isbn = isbn != null && isbn.isBlank() ? null : isbn;
     }
 
     public LocalDate getReadingStartDate() {
