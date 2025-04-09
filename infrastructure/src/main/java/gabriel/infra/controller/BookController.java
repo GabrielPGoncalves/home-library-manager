@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
@@ -50,18 +51,20 @@ public class BookController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid BookCreateDTO book) throws BookValidationFailedException {
+    public String create(@Valid BookCreateDTO book, RedirectAttributes redirectAttributes) throws BookValidationFailedException {
         Book mappedBook = bookDTOMapper.toDomain(book);
         bookService.create(mappedBook);
 
+        redirectAttributes.addFlashAttribute("success", "Livro registrado com sucesso");
         return "redirect:/library/books";
     }
 
     @PostMapping("/update")
-    public String update(@Valid BookUpdateDTO book) throws BookNotFoundException, BookValidationFailedException {
+    public String update(@Valid BookUpdateDTO book, RedirectAttributes redirectAttributes) throws BookNotFoundException, BookValidationFailedException {
         Book mapperBook = bookDTOMapper.toDomain(book);
         bookService.update(mapperBook);
 
+        redirectAttributes.addFlashAttribute("success", "Livro atualizado com sucesso");
         return "redirect:/library/books";
     }
 
@@ -76,9 +79,10 @@ public class BookController {
     }
 
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable UUID id) {
+    public String delete(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
         bookService.delete(id);
 
+        redirectAttributes.addFlashAttribute("success", "Livro excluído com sucesso");
         return "redirect:/library/books";
     }
 }

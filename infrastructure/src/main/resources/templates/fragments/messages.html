@@ -1,0 +1,4 @@
+<th:block th:fragment="alert">
+    <input id="error-message" type="text" th:if="${error}" th:value="${error}" hidden>
+    <input id="success-message" type="text" th:if="${success}" th:value="${success}" hidden>
+</th:block>
