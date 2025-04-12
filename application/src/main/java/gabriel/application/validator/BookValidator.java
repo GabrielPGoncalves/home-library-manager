@@ -1,5 +1,6 @@
 package gabriel.application.validator;
 
+import gabriel.application.validator.general.ISBNValidator;
 import gabriel.core.domain.Book;
 
 import java.time.LocalDate;
@@ -37,6 +38,9 @@ public class BookValidator {
             notification.addError("The book has the reading date, but has not been read");
         }
 
+        if(!checkIfIsbnIsValid(book.getIsbn())){
+            notification.addError("The book doesn't have a valid ISBN");
+        }
 
         return notification;
     }
@@ -97,4 +101,13 @@ public class BookValidator {
         return book.wasRead();
     }
 
+    private boolean checkIfIsbnIsValid(String isbn){
+        if(isbn == null){
+            return true;
+        }
+
+        ISBNValidator isbnValidator = new ISBNValidator();
+
+        return isbnValidator.validate(isbn);
+    }
 }
