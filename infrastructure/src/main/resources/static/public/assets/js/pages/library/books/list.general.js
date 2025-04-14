@@ -1,8 +1,11 @@
-$(document).ready(() => {
-    let order = 'REGISTER_DATE'
-    let sort = 'DESC'
+let page = 1
+const size = 10
+let order = 'REGISTER_DATE'
+let sort = 'DESC'
 
-    loadBooks(order, sort)
+$(document).ready(() => {
+
+    loadBooks(page, size, order, sort)
 
     let orderSelect = $('#order-select')
 
@@ -14,7 +17,7 @@ $(document).ready(() => {
     orderSelect.val(order).trigger('change')
     orderSelect.change(e => {
         order = $(e.target).val()
-        loadBooks(order, sort)
+        loadBooks(page, size, order, sort)
     })
 
     let sortSelect = $('#sort-select')
@@ -27,8 +30,9 @@ $(document).ready(() => {
     sortSelect.val(sort).trigger('change')
     sortSelect.change(e => {
         sort = $(e.target).val()
-        loadBooks(order, sort)
+        loadBooks(page, size, order, sort)
     })
+
 })
 
 function generateBookElement(bookData){
@@ -75,12 +79,61 @@ function disposeBookElementsPopovers(){
     $('[data-toggle="popover"]').popover('dispose')
 }
 
-function loadBooks(order, sort){
+function generatePaginationElement(actualPage, pageSize, totalPageCount){
+    // const paginationElementMaxPageCount = 5;
+    $('#pagination-container').append(`
+        <ul id="pagination-element" class="pagination justify-content-center"></ul>
+    `)
+
+    for(let i = 0; i < totalPageCount; i++){
+        $('#pagination-element').append(`
+                    <li class="page-item ${i + 1 === actualPage ? 'active' : ''}">
+                        <button type="button" class="btn-link page-link" data-page-target="${i + 1}">${i + 1}</button>
+                    </li>
+        `)
+    }
+
+    $('#pagination-element').prepend(`
+            <li class="page-item ${actualPage === 1 ? 'disabled' : ''}">
+                <button type="button" class="page-link" data-page-target="${actualPage - 1}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Anterior</span>
+                </button>
+            </li>
+    `)
+
+    $('#pagination-element').append(`
+            <li class="page-item ${actualPage === totalPageCount ? 'disabled' : ''}">
+                <button type="button" class="page-link" data-page-target="${actualPage + 1}" aria-label="Próximo">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Próximo</span>
+                </button>
+            </li>
+    `)
+
+    $('.page-link').click(e => {
+        if($(e.target).parent().hasClass('active')){
+            return
+        }
+
+        page = $(e.target).attr('data-page-target')
+        loadBooks(page, size, order, sort)
+    })
+}
+
+function loadBooks(page, size, order, sort){
     $.ajax({
         method: 'GET',
-        url: `${window.location.origin}/api/library/books?page=1&size=10&order=${order}&sort=${sort}`,
+        url: `${window.location.origin}/api/library/books?page=${page}&size=${size}&order=${order}&sort=${sort}`,
         contentType: 'application/json',
         success: (data) => {
+            console.log(data)
+
+            $('#pagination-container').empty()
+            if(data.totalPageCount > 1){
+                generatePaginationElement(data.number, data.size, data.totalPageCount)
+            }
+
             let bookListSelector = $('#book-list')
 
             if(!bookListSelector.is(':empty')){

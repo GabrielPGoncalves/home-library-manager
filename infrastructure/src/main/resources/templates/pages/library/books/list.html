@@ -31,7 +31,7 @@
         </div>
 
         <section class="content">
-            <div class="container">
+            <div id="main-content" class="container">
                 <div class="row mb-3">
                     <div class="col-sm-2">
                         <select id="order-select" class="form-control">
@@ -60,28 +60,9 @@
                     </div>
                 </div>
                 <div id="book-list" class="row">
-<!--                    <div class="col-lg-6" th:each="book: ${bookList}">-->
-<!--                        <div class="card card-default book-card">-->
-<!--                            <div class="card-body d-flex flex-sm-row flex-column">-->
-<!--                                <div class="mr-sm-2 mb-2">-->
-<!--                                    <img th:src="'data:image/jpeg;base64,' + ${book.coverImage}" alt="" class="book-cover">-->
-<!--                                </div>-->
-<!--                                <div class="w-100 mb-sm-0 mb-2">-->
-<!--                                    <h5 class="card-title mb-1" th:text="${book.title}"></h5>-->
-<!--                                    <p class="card-text text-muted" th:text="${book.author}"></p>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex w-100 justify-content-sm-end align-items-center text-lg">-->
-<!--                                    <button type="button" class="btn btn-link text-secondary" data-toggle="popover"><i class="fas fa-ellipsis-v"></i></button>-->
-<!--                                    <div class="d-none popover-content">-->
-<!--                                        <div class="popover-body d-flex flex-row justify-content-center">-->
-<!--                                            <a th:href="@{/library/books/{id}/edit(id=${book.id})}" class="mr-3"><i class="fas fa-pen"></i></a>-->
-<!--                                            <a th:href="@{/library/books/{id}/delete(id=${book.id})}" class="text-danger"><i class="fas fa-trash"></i></a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                </div>
+                <div id="pagination-container">
+
                 </div>
             </div>
         </section>

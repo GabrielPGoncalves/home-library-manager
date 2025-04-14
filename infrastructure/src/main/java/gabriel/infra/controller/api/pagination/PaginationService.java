@@ -29,7 +29,7 @@ public class PaginationService {
                 .map(resourceMapper)
                 .toList();
 
-        return new Page<>(pageNum, pageSize, content);
+        return new Page<>(pageNum, pageSize, totalPages, content);
     }
 
 }
