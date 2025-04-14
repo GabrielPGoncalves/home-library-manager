@@ -1,13 +1,13 @@
-package gabriel.infra.controller;
+package gabriel.infra.controller.web;
 
 import gabriel.application.service.BookService;
 import gabriel.core.domain.Book;
 import gabriel.core.exception.BookNotFoundException;
 import gabriel.core.exception.BookValidationFailedException;
-import gabriel.infra.controller.dto.BookCreateDTO;
-import gabriel.infra.controller.dto.BookUpdateDTO;
-import gabriel.infra.controller.dto.BookViewDTO;
-import gabriel.infra.controller.mapper.BookDTOMapper;
+import gabriel.infra.controller.web.dto.BookCreateDTO;
+import gabriel.infra.controller.web.dto.BookUpdateDTO;
+import gabriel.infra.controller.web.dto.BookViewDTO;
+import gabriel.infra.controller.web.mapper.BookDTOMapper;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

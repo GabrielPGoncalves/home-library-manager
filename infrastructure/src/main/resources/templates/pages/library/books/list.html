@@ -2,9 +2,13 @@
 <html lang="pt-br" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <th:block th:replace="~{fragments/head :: inside-head}"></th:block>
+    <link rel="stylesheet" th:href="@{/public/plugins/select2/css/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/public/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css}">
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
+    <th:block th:replace="~{fragments/preloader :: preloader}"></th:block>
+
     <th:block th:replace="~{fragments/messages :: alert}"></th:block>
 
     <th:block th:replace="~{fragments/navbar :: navbar}"></th:block>
@@ -28,29 +32,56 @@
 
         <section class="content">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-6" th:each="book: ${bookList}">
-                        <div class="card card-default book-card">
-                            <div class="card-body d-flex flex-sm-row flex-column">
-                                <div class="mr-sm-2 mb-2">
-                                    <img th:src="'data:image/jpeg;base64,' + ${book.coverImage}" alt="" class="book-cover">
-                                </div>
-                                <div class="w-100 mb-sm-0 mb-2">
-                                    <h5 class="card-title mb-1" th:text="${book.title}"></h5>
-                                    <p class="card-text text-muted" th:text="${book.author}"></p>
-                                </div>
-                                <div class="d-flex w-100 justify-content-sm-end align-items-center text-lg">
-                                    <button type="button" class="btn btn-link text-secondary" data-toggle="popover"><i class="fas fa-ellipsis-v"></i></button>
-                                    <div class="d-none popover-content">
-                                        <div class="popover-body d-flex flex-row justify-content-center">
-                                            <a th:href="@{/library/books/{id}/edit(id=${book.id})}" class="mr-3"><i class="fas fa-pen"></i></a>
-                                            <a th:href="@{/library/books/{id}/delete(id=${book.id})}" class="text-danger"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <select id="order-select" class="form-control">
+                            <option value="TITLE">Título</option>
+                            <option value="AUTHOR">Autor</option>
+                            <option value="REGISTER_DATE" selected>Data de Registro</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select id="sort-select" class="form-control">
+                            <option value="ASC">Crescente</option>
+                            <option value="DESC" selected>Decrescente</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8">
+                        <form action="#">
+                            <div class="input-group">
+                                <input type="search" class="form-control" placeholder="Procurar por um livro">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
+                </div>
+                <div id="book-list" class="row">
+<!--                    <div class="col-lg-6" th:each="book: ${bookList}">-->
+<!--                        <div class="card card-default book-card">-->
+<!--                            <div class="card-body d-flex flex-sm-row flex-column">-->
+<!--                                <div class="mr-sm-2 mb-2">-->
+<!--                                    <img th:src="'data:image/jpeg;base64,' + ${book.coverImage}" alt="" class="book-cover">-->
+<!--                                </div>-->
+<!--                                <div class="w-100 mb-sm-0 mb-2">-->
+<!--                                    <h5 class="card-title mb-1" th:text="${book.title}"></h5>-->
+<!--                                    <p class="card-text text-muted" th:text="${book.author}"></p>-->
+<!--                                </div>-->
+<!--                                <div class="d-flex w-100 justify-content-sm-end align-items-center text-lg">-->
+<!--                                    <button type="button" class="btn btn-link text-secondary" data-toggle="popover"><i class="fas fa-ellipsis-v"></i></button>-->
+<!--                                    <div class="d-none popover-content">-->
+<!--                                        <div class="popover-body d-flex flex-row justify-content-center">-->
+<!--                                            <a th:href="@{/library/books/{id}/edit(id=${book.id})}" class="mr-3"><i class="fas fa-pen"></i></a>-->
+<!--                                            <a th:href="@{/library/books/{id}/delete(id=${book.id})}" class="text-danger"><i class="fas fa-trash"></i></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </section>
@@ -61,6 +92,7 @@
 
 <th:block th:replace="~{fragments/scripts :: general}"></th:block>
 <th:block th:replace="~{fragments/scripts :: core}"></th:block>
+<script th:src="@{/public/plugins/select2/js/select2.full.min.js}"></script>
 <script th:src="@{/public/assets/js/pages/library/books/list.general.js}"></script>
 </body>
 </html>

@@ -1,16 +1,12 @@
-package gabriel.infra.controller.dto;
+package gabriel.infra.controller.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.ISBN;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
-public class BookUpdateDTO {
-    @NotNull
-    private UUID id;
+public class BookCreateDTO {
 
     @NotBlank
     @Size(min = 2, max = 100)
@@ -35,15 +31,6 @@ public class BookUpdateDTO {
     private Boolean read;
 
     private LocalDate readingEndDate;
-
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

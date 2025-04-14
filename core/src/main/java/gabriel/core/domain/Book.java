@@ -3,6 +3,7 @@ package gabriel.core.domain;
 import gabriel.core.domain.value.Image;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -22,13 +23,15 @@ public class Book {
     private LocalDate readingStartDate;
     private boolean read;
     private LocalDate readingEndDate;
+    private LocalDateTime registerDate;
 
-    public Book(UUID id, String title, String author, Image coverImage, Type type, String isbn, LocalDate acquisitionDate, LocalDate readingStartDate, boolean read, LocalDate readingEndDate) {
+    public Book(UUID id, String title, String author, Image coverImage, Type type, String isbn, LocalDate acquisitionDate, LocalDate readingStartDate, boolean read, LocalDate readingEndDate, LocalDateTime registerDate) {
         this(id, title, author, coverImage, type, isbn);
         this.acquisitionDate = acquisitionDate;
         this.readingStartDate = readingStartDate;
         this.read = read;
         this.readingEndDate = readingEndDate;
+        this.registerDate = registerDate;
     }
 
     public Book(UUID id, String title, String author, Image coverImage, Type type, String isbn) {
@@ -129,6 +132,14 @@ public class Book {
 
     public void setReadingEndDate(LocalDate readingEndDate) {
         this.readingEndDate = readingEndDate;
+    }
+
+    public LocalDateTime getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDateTime registerDate) {
+        this.registerDate = registerDate;
     }
 
     @Override

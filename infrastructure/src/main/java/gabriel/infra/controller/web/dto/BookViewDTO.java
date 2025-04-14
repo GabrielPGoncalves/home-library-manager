@@ -1,4 +1,4 @@
-package gabriel.infra.controller.dto;
+package gabriel.infra.controller.web.dto;
 
 import java.util.UUID;
 

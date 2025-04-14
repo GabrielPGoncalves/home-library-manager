@@ -19,11 +19,19 @@ public interface BookEntityMapper {
     BookEntity toEntity(Book book);
 
     default byte[] convertImageToByteArray(Image image){
+        if(image == null){
+            return null;
+        }
+
         Base64.Decoder decoder = Base64.getDecoder();
         return decoder.decode(image.url());
     }
 
     default Image convertByteArrayToImage(byte[] bytes){
+        if(bytes == null){
+            return null;
+        }
+
         Base64.Encoder encoder = Base64.getEncoder();
         String url = encoder.encodeToString(bytes);
 

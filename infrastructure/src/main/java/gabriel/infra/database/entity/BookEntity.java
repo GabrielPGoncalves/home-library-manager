@@ -4,6 +4,7 @@ import gabriel.core.domain.Book;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -40,6 +41,9 @@ public class BookEntity {
     private Boolean read;
 
     private LocalDate readingEndDate;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime registerDate;
 
     public UUID getId() {
         return id;
@@ -119,6 +123,14 @@ public class BookEntity {
 
     public void setReadingEndDate(LocalDate readingEndDate) {
         this.readingEndDate = readingEndDate;
+    }
+
+    public LocalDateTime getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDateTime registerDate) {
+        this.registerDate = registerDate;
     }
 
     @Override
